@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NumArrayTest {
+
     @Test
     void test() {
         final NumArray obj = new NumArray(new int[]{1, 3, 5});
@@ -33,10 +34,12 @@ class NumArrayTest {
 [[[-28,-39,53,65,11,-56,-65,-39,-43,97]],[5,6],[9,27],[2,3],[6,7],[1,-82],[3,-72],[3,7],[1,8],[5,13],[4,-67]]
          */
         final NumArray subject = new NumArray(new int[]{-28, -39, 53, 65, 11, -56, -65, -39, -43, 97});
-        subject.update(9, 27);
+        assertEquals(-30, subject.sumRange(3, 9));
+        subject.update(4, -72);
+        assertEquals(-113, subject.sumRange(3, 9));
         subject.update(1, -82);
-        subject.update(3, -72);
+        subject.update(9, 27);
 
-        assertEquals(-293, subject.sumRange(1, 8));
+        assertEquals(-239, subject.sumRange(1, 8));
     }
 }
