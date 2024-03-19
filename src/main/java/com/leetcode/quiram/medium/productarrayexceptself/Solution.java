@@ -6,22 +6,26 @@ package com.leetcode.quiram.medium.productarrayexceptself;
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         final int n = nums.length;
-        final int[] prefixes = new int[n];
-        final int[] suffixes = new int[n];
         final int[] answers = new int[n];
 
-        prefixes[0] = 1;
+        // answers accumulates prefixes
+        answers[0] = 1;
         for (int i = 1; i < n; i++) {
-            prefixes[i] = prefixes[i - 1] * nums[i - 1];
+            answers[i] = answers[i - 1] * nums[i - 1];
         }
 
-        suffixes[n - 1] = 1;
+        // nums turn into suffixes
+        int acc = nums[n - 1];
+        nums[n - 1] = 1;
         for (int i = n - 2; i >= 0; i--) {
-            suffixes[i] = suffixes[i + 1] * nums[i + 1];
+            final int newValue = nums[i] * acc;
+            nums[i] = acc;
+            acc = newValue;
         }
 
+        // aggregate prefixes and suffixes
         for (int i = 0; i < n; i++) {
-            answers[i] = prefixes[i] * suffixes[i];
+            answers[i] = answers[i] * nums[i];
         }
 
         return answers;
