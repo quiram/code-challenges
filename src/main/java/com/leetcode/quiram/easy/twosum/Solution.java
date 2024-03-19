@@ -1,4 +1,4 @@
-package com.leetcode.quiram.twosum;
+package com.leetcode.quiram.easy.twosum;
 
 import java.util.HashMap;
 import java.util.Map;

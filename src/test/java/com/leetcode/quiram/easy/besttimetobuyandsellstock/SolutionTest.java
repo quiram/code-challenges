@@ -1,4 +1,4 @@
-package com.leetcode.quiram.besttimetobuyandsellstock;
+package com.leetcode.quiram.easy.besttimetobuyandsellstock;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

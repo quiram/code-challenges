@@ -1,4 +1,4 @@
-package com.leetcode.quiram.besttimetobuyandsellstock;
+package com.leetcode.quiram.easy.besttimetobuyandsellstock;
 
 /**
  * <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">121. Best Time to Buy and Sell Stock</a>

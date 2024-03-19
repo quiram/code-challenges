@@ -1,4 +1,4 @@
-package com.leetcode.quiram.containsduplicate2;
+package com.leetcode.quiram.easy.containsduplicate2;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

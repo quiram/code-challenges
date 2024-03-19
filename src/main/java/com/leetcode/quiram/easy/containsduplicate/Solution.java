@@ -1,4 +1,4 @@
-package com.leetcode.quiram.containsduplicate;
+package com.leetcode.quiram.easy.containsduplicate;
 
 import java.util.HashSet;
 import java.util.Set;
