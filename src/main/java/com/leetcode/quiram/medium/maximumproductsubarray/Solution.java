@@ -9,6 +9,15 @@ import static java.lang.Math.abs;
  */
 class Solution {
     public int maxProduct(int[] nums) {
+        int[] reverse_nums = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            reverse_nums[nums.length - 1 - i] = nums[i];
+        }
+
+        return max(maxForward(nums), maxForward(reverse_nums));
+    }
+
+    private int maxForward(int[] nums) {
         int abs_prod = 1;
         int prod = 1;
         int max = MIN_VALUE;
@@ -17,19 +26,6 @@ class Solution {
             prod = max(prod * n, max(n, abs_prod));
             max = max(max, prod);
         }
-
-        int forward_max = max;
-
-        abs_prod = 1;
-        prod = 1;
-        max = MIN_VALUE;
-        for (int i = nums.length - 1; i >= 0; i--) {
-            int n = nums[i];
-            abs_prod = abs(abs_prod * n) > abs(n) ? abs_prod * n : n;
-            prod = max(prod * n, max(n, abs_prod));
-            max = max(max, prod);
-        }
-
-        return max(max, forward_max);
+        return max;
     }
 }
