@@ -17,10 +17,6 @@ class Result {
      */
 
     public static void insertionSort2(int n, List<Integer> arr) {
-        if (n < 2) {
-            return;
-        }
-
         for (int i = 1; i < n; i++) {
             int j = i - 1;
             while (j >= 0 && arr.get(i) < arr.get(j)) {
