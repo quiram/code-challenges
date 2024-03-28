@@ -1,10 +1,13 @@
 
 
-package com.leetcode.quiram;
+package com.leetcode.quiram.medium.rangesumquerymutable;
 
 import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
 
+/**
+ * <a href="https://leetcode.com/problems/range-sum-query-mutable/description/">307. Range Sum Query - Mutable</a>
+ */
 class NumArray {
 
     private final int[] nums;

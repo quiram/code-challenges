@@ -1,4 +1,4 @@
-package com.leetcode.quiram;
+package com.leetcode.quiram.medium.rangesumquerymutable;
 
 import org.junit.jupiter.api.Test;
 
