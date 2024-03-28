@@ -1,4 +1,4 @@
-package com.leetcode.quiram;
+package com.leetcode.quiram.easy.ransomnote;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

@@ -1,4 +1,4 @@
-package com.leetcode.quiram;
+package com.leetcode.quiram.easy.ransomnote;
 
 import java.util.Map;
 
@@ -8,6 +8,9 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * <a href="https://leetcode.com/problems/ransom-note/description/">383. Ransom Note</a>
+ */
 class RansomNote {
     public boolean canConstruct(String ransomNote, String magazine) {
         var ransomNoteLetterCount = letterCount(ransomNote);
