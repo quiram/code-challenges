@@ -5,7 +5,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RansomTest {
+class SolutionTest {
     @ParameterizedTest
     @CsvSource(value = {
             "a,b,false",
@@ -13,7 +13,7 @@ class RansomTest {
             "aa,aab,true"
     })
     void test(String ransomNote, String magazineNote, boolean expectedAnswer) {
-        final RansomNote subject = new RansomNote();
+        final Solution subject = new Solution();
         assertEquals(expectedAnswer, subject.canConstruct(ransomNote, magazineNote));
     }
 }

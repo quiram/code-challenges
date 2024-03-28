@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toMap;
 /**
  * <a href="https://leetcode.com/problems/ransom-note/description/">383. Ransom Note</a>
  */
-class RansomNote {
+class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         var ransomNoteLetterCount = letterCount(ransomNote);
         var magazineLetterCount = letterCount(magazine);
