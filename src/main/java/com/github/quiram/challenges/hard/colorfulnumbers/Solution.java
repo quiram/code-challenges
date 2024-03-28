@@ -1,4 +1,4 @@
-package com.tutorialhorizon.quiram.hard.colorfulnumbers;
+package com.github.quiram.challenges.hard.colorfulnumbers;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.tutorialhorizon.quiram.hard.colorfulnumbers;
+package com.github.quiram.challenges.hard.colorfulnumbers;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
