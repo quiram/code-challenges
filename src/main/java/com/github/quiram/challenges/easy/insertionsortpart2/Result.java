@@ -19,19 +19,12 @@ class Result {
     public static void insertionSort2(int n, List<Integer> arr) {
         for (int i = 1; i < n; i++) {
             int j = i - 1;
-            while (j >= 0 && arr.get(i) < arr.get(j)) {
+            final var element = arr.get(i);
+            while (j >= 0 && element < arr.get(j)) {
+                arr.set(j + 1, arr.get(j));
                 j--;
             }
-            j++;
-
-            int prev = arr.get(i);
-
-            while (j <= i) {
-                int temp = arr.get(j);
-                arr.set(j, prev);
-                prev = temp;
-                j++;
-            }
+            arr.set(j + 1, element);
 
             System.out.printf("%s%n", arr.stream().map(Object::toString).collect(Collectors.joining(" ")));
         }
