@@ -1,83 +1,78 @@
 package com.github.quiram.challenges.easy.qheap1;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * <a href="https://www.hackerrank.com/challenges/qheap1/problem">QHEAP1</a>
  */
 public class Solution {
+    public static class Heap {
+        int[] array;
+        int lastIndex;
 
-    public static class HeapNode {
-        int data;
-        HeapNode left;
-        HeapNode right;
-
-        public HeapNode(int data) {
-            this.data = data;
-        }
-    }
-
-    public static HeapNode insert(HeapNode node, int value) {
-        if (node == null || value < node.data) {
-            HeapNode newRoot = new HeapNode(value);
-            newRoot.left = node;
-            return newRoot;
+        public Heap() {
+            array = new int[10];
+            lastIndex = -1;
         }
 
-        if (node.left == null) {
-            node.left = insert(node.left, value);
-        } else if (node.right == null) {
-            node.right = insert(node.right, value);
-        } else if (node.left.data > node.right.data) {
-            node.left = insert(node.left, value);
-        } else {
-            node.right = insert(node.right, value);
-        }
-
-        return node;
-    }
-
-    public static HeapNode remove(HeapNode node, int value) {
-        if (node == null || value < node.data) {
-            // we've gone past, not in this branch
-            return node;
-        }
-
-        if (value == node.data) {
-            // remove and rebalance
-            if (node.left == null) {
-                return node.right;
+        public void insert(int value) {
+            if (lastIndex == array.length - 1) {
+                array = Arrays.copyOf(array, array.length * 2);
             }
 
-            if (node.right == null) {
-                return node.left;
+            lastIndex++;
+            array[lastIndex] = value;
+
+            //promote value
+            int child = lastIndex;
+            int parent = (child - 1) / 2;
+            while (child > parent && array[parent] > value) {
+                array[child] = array[parent];
+                array[parent] = value;
+                child = parent;
+                parent = (child - 1) / 2;
             }
-
-            HeapNode preservedNode;
-            HeapNode promotedNode;
-
-            if (node.left.data < node.right.data) {
-                promotedNode = node.left;
-                preservedNode = node.right;
-            } else {
-                promotedNode = node.right;
-                preservedNode = node.left;
-            }
-
-            HeapNode newRoot = new HeapNode(promotedNode.data);
-            newRoot.left = preservedNode;
-            newRoot.right = remove(promotedNode, promotedNode.data);
-            return newRoot;
         }
 
-        node.left = remove(node.left, value);
-        node.right = remove(node.right, value);
+        public void remove(int value) {
+            int i = 0;
+            while (array[i] != value) {
+                i++;
+            }
 
-        return node;
-    }
+            array[i] = array[lastIndex];
+            value = array[i];
+            lastIndex--;
 
-    public static void print(HeapNode node) {
-        System.out.println(node.data);
+            int parent = i;
+
+            boolean balanced = false;
+            while (!balanced) {
+                int child1 = 2 * parent + 1;
+                int child2 = 2 * parent + 2;
+                int child;
+                if (child1 > lastIndex) {
+                    child = -1;
+                } else if (child2 > lastIndex || array[child1] < array[child2]) {
+                    child = child1;
+                } else {
+                    child = child2;
+                }
+
+                if (child > 0 && array[parent] > array[child]) {
+                    array[parent] = array[child];
+                    array[child] = value;
+                    parent = child;
+                } else {
+                    balanced = true;
+                }
+            }
+        }
+
+        public void printTop() {
+            System.out.println(array[0]);
+        }
     }
 
 
@@ -85,23 +80,15 @@ public class Solution {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         Scanner scanner = new Scanner(System.in);
         int q = scanner.nextInt();
-        HeapNode root = null;
+        Heap heap = new Heap();
 
         for (int i = 0; i < q; i++) {
             int command = scanner.nextInt();
-            int value;
             switch (command) {
-                case 1 -> {
-                    value = scanner.nextInt();
-                    root = insert(root, value);
-                }
-                case 2 -> {
-                    value = scanner.nextInt();
-                    root = remove(root, value);
-                }
-                case 3 -> {
-                    print(requireNonNull(root));
-                }
+                case 1 -> heap.insert(scanner.nextInt());
+                case 2 -> heap.remove(scanner.nextInt());
+                case 3 -> heap.printTop();
+                default -> throw new RuntimeException("invalid command: " + command);
             }
         }
     }
