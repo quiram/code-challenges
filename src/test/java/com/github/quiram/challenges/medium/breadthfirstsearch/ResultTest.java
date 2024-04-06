@@ -1,4 +1,4 @@
-package com.github.quiram.tests.intermediate.breadthfirstsearch;
+package com.github.quiram.challenges.medium.breadthfirstsearch;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

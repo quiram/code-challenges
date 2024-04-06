@@ -1,4 +1,4 @@
-package com.github.quiram.tests.intermediate.breadthfirstsearch;
+package com.github.quiram.challenges.medium.breadthfirstsearch;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -8,6 +8,9 @@ import static java.util.Collections.singleton;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
+/**
+ * <a href="https://www.hackerrank.com/challenges/bfsshortreach/">Breadth First Search: Shortest Reach</a>
+ */
 class Result {
     private static boolean[] visited;
     private static int[] steps;
