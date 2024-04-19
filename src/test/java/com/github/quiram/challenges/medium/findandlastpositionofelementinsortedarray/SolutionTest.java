@@ -1,4 +1,4 @@
-package com.github.quiram.challenges.hard.findandlastpositionofelementinsortedarray;
+package com.github.quiram.challenges.medium.findandlastpositionofelementinsortedarray;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

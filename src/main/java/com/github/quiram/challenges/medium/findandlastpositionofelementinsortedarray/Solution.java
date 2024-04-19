@@ -1,4 +1,4 @@
-package com.github.quiram.challenges.hard.findandlastpositionofelementinsortedarray;
+package com.github.quiram.challenges.medium.findandlastpositionofelementinsortedarray;
 
 /**
  * <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34. Find First and Last Position of Element in Sorted Array</a>
