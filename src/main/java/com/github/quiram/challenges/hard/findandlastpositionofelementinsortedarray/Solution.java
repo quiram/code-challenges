@@ -5,36 +5,32 @@ package com.github.quiram.challenges.hard.findandlastpositionofelementinsortedar
  */
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        if (nums.length == 0) {
-            return new int[]{-1, -1};
-        }
-
-        // double binary search, one looking for lower bound, another looking for upper bound
         return new int[]{search(nums, target, true), search(nums, target, false)};
     }
 
-    public int search(int[] nums, int target, boolean lowerBound) {
+    private int search(int[] nums, int target, boolean lowerBound) {
         int ini = 0;
         int end = nums.length - 1;
+        int index = -1;
 
-        while (true) {
-            if (end - ini <= 1) {
-                if (nums[ini] == target && (lowerBound || nums[end] != target)) {
-                    return ini;
-                }
-                if (nums[end] == target) {
-                    return end;
-                }
-                return -1;
-            }
-
+        while (ini <= end) {
             int pivot = (ini + end) / 2;
 
-            if (nums[pivot] > target || lowerBound && nums[pivot] == target) {
-                end = pivot;
+            if (target < nums[pivot]) {
+                end = pivot - (end == pivot ? 1 : 0);
+            } else if (target > nums[pivot]) {
+                ini = pivot + (ini == pivot ? 1 : 0);
             } else {
-                ini = pivot;
+                index = pivot;
+                if (lowerBound) {
+                    end = pivot - 1;
+                } else {
+                    ini = pivot + 1;
+                }
             }
         }
+
+        return index;
     }
 }
+
