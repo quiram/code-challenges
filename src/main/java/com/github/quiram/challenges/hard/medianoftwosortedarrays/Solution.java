@@ -1,28 +1,51 @@
 package com.github.quiram.challenges.hard.medianoftwosortedarrays;
 
 class Solution {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int[] merged = new int[nums1.length + nums2.length];
-        int j = 0, k = 0;
-        for (int i = 0; i < merged.length; i++) {
-            if (j == nums1.length) {
-                merged[i] = nums2[k];
-                k++;
-            } else if (k == nums2.length) {
-                merged[i] = nums1[j];
-                j++;
-            } else if (nums1[j] < nums2[k]) {
-                merged[i] = nums1[j];
-                j++;
-            } else {
-                merged[i] = nums2[k];
-                k++;
-            }
+    public double findMedianSortedArrays(int[] a, int[] b) {
+        final int n = a.length;
+        final int m = b.length;
+        double k_th = solve(a, b, 0, n - 1, 0, m - 1, (n + m - 1) / 2);
+        double k1_th;
+
+        if ((n + m) % 2 == 0) {
+            k1_th = solve(a, b, 0, n - 1, 0, m - 1, (n + m) / 2);
+        } else {
+            k1_th = k_th;
         }
 
-        if (merged.length % 2 == 1)
-            return merged[merged.length / 2];
-        else
-            return (merged[merged.length / 2 - 1] + merged[merged.length / 2] + 0.0) / 2;
+        return (k_th + k1_th) / 2;
+    }
+
+    private double solve(int[] a, int[] b, int a_start, int a_end, int b_start, int b_end, int k) {
+        if (a_start > a_end) {
+            return b[k + b_start];
+        } else if (b_start > b_end) {
+            return a[k + a_start];
+        }
+
+        int a_mid = (a_end + a_start) / 2;
+        int b_mid = (b_end + b_start) / 2;
+        int a_median = a[a_mid];
+        int b_median = b[b_mid];
+        int threshold = a_mid + b_mid + 1 - a_start - b_start;
+
+        if (a_median <= b_median) {
+            if (k >= threshold) {
+                // discard lower half of A
+                return solve(a, b, a_mid + 1, a_end, b_start, b_end, k - (a_mid + 1 - a_start));
+            } else {
+                // discard upper half of B
+                return solve(a, b, a_start, a_end, b_start, b_mid - 1, k);
+            }
+        } else {
+            // same, but inverting A and B
+            if (k >= threshold) {
+                // discard lower half of B
+                return solve(a, b, a_start, a_end, b_mid + 1, b_end, k - (b_mid + 1 - b_start));
+            } else {
+                // discard upper half of A
+                return solve(a, b, a_start, a_mid - 1, b_start, b_end, k);
+            }
+        }
     }
 }
