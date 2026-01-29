@@ -1,5 +1,8 @@
 package com.github.quiram.challenges.hard.medianoftwosortedarrays;
 
+/**
+ * <a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/">4. Median of Two Sorted Arrays</a>
+ */
 class Solution {
     public double findMedianSortedArrays(int[] a, int[] b) {
         final int n = a.length;
