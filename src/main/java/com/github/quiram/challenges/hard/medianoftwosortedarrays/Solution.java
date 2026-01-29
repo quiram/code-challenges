@@ -5,15 +5,14 @@ class Solution {
         final int n = a.length;
         final int m = b.length;
         double k_th = solve(a, b, 0, n - 1, 0, m - 1, (n + m - 1) / 2);
-        double k1_th;
 
         if ((n + m) % 2 == 0) {
-            k1_th = solve(a, b, 0, n - 1, 0, m - 1, (n + m) / 2);
+            final double k1_th = solve(a, b, 0, n - 1, 0, m - 1, (n + m) / 2);
+            return (k_th + k1_th) / 2;
         } else {
-            k1_th = k_th;
+            return k_th;
         }
 
-        return (k_th + k1_th) / 2;
     }
 
     private double solve(int[] a, int[] b, int a_start, int a_end, int b_start, int b_end, int k) {
