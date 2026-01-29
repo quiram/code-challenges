@@ -17,21 +17,21 @@ class Solution {
 
     private double solve(int[] a, int[] b, int a_start, int a_end, int b_start, int b_end, int k) {
         if (a_start > a_end) {
-            return b[k + b_start];
+            return b[k - a_start];
         } else if (b_start > b_end) {
-            return a[k + a_start];
+            return a[k - b_start];
         }
 
         int a_mid = (a_end + a_start) / 2;
         int b_mid = (b_end + b_start) / 2;
         int a_median = a[a_mid];
         int b_median = b[b_mid];
-        int threshold = a_mid + b_mid + 1 - a_start - b_start;
+        int threshold = a_mid + b_mid + 1;
 
         if (a_median <= b_median) {
             if (k >= threshold) {
                 // discard lower half of A
-                return solve(a, b, a_mid + 1, a_end, b_start, b_end, k - (a_mid + 1 - a_start));
+                return solve(a, b, a_mid + 1, a_end, b_start, b_end, k);
             } else {
                 // discard upper half of B
                 return solve(a, b, a_start, a_end, b_start, b_mid - 1, k);
@@ -40,7 +40,7 @@ class Solution {
             // same, but inverting A and B
             if (k >= threshold) {
                 // discard lower half of B
-                return solve(a, b, a_start, a_end, b_mid + 1, b_end, k - (b_mid + 1 - b_start));
+                return solve(a, b, a_start, a_end, b_mid + 1, b_end, k);
             } else {
                 // discard upper half of A
                 return solve(a, b, a_start, a_mid - 1, b_start, b_end, k);
