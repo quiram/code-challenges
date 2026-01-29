@@ -4,51 +4,47 @@ class Solution {
     public double findMedianSortedArrays(int[] a, int[] b) {
         final int n = a.length;
         final int m = b.length;
-        double k_th = solve(a, b, n - 1, m - 1, (n + m - 1) / 2);
+
+        if (n > m) {
+            // We need A to be smaller than B
+            return findMedianSortedArrays(b, a);
+        }
+
+        final int total = n + m;
+        final int half = total / 2;
+        int low = 0;
+        int high = a.length;
+        int min1, max1, min2, max2;
+        int c1;
+        int c2;
+        do {
+            c1 = (low + high) / 2;
+            c2 = half - c1;
+
+            max1 = c1 == 0 ? Integer.MIN_VALUE : a[c1 - 1];
+            min1 = c1 == n ? Integer.MAX_VALUE : a[c1];
+            max2 = c2 == 0 ? Integer.MIN_VALUE : b[c2 - 1];
+            min2 = c2 == m ? Integer.MAX_VALUE : b[c2];
+
+            if (max1 > min2) {
+                // Elements left of c1 are higher than right of c2, move cut downwards to reduce its size
+                high = c1 - 1;
+            } else if (max2 > min1) {
+                // elements left of c2 are higher than right of c1, move cut upwards to increase its size
+                low = c1 + 1;
+            } else {
+                // we're good to go
+                low = high + 1;
+            }
+        } while (low <= high);
+
+        double min = Math.min(min1, min2);
 
         if ((n + m) % 2 == 0) {
-            final double k1_th = solve(a, b, n - 1, m - 1, (n + m) / 2);
-            return (k_th + k1_th) / 2;
+            double max = Math.max(max1, max2);
+            return (min + max + 0.0) / 2;
         } else {
-            return k_th;
-        }
-
-    }
-
-    private double solve(int[] a, int[] b, int a_end, int b_end, int k) {
-        int a_start = 0;
-        int b_start = 0;
-        while (a_start <= a_end && b_start <= b_end) {
-            int a_mid = (a_end + a_start) / 2;
-            int b_mid = (b_end + b_start) / 2;
-            int a_median = a[a_mid];
-            int b_median = b[b_mid];
-            int threshold = a_mid + b_mid + 1;
-
-            if (a_median <= b_median) {
-                if (k >= threshold) {
-                    // discard lower half of A
-                    a_start = a_mid + 1;
-                } else {
-                    // discard upper half of B
-                    b_end = b_mid - 1;
-                }
-            } else {
-                // same, but inverting A and B
-                if (k >= threshold) {
-                    // discard lower half of B
-                    b_start = b_mid + 1;
-                } else {
-                    // discard upper half of A
-                    a_end = a_mid - 1;
-                }
-            }
-        }
-
-        if (a_start > a_end) {
-            return b[k - a_start];
-        } else {
-            return a[k - b_start];
+            return min;
         }
     }
 }
