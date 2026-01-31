@@ -6,34 +6,31 @@ import java.util.Arrays;
  * <a href="https://leetcode.com/problems/coin-change/">322. Coin Change</a>
  */
 class Solution {
-    private int[][] cache;
-    private int[] coins;
+    private int[] cache;
 
     public int coinChange(int[] coins, int amount) {
-        cache = new int[coins.length][amount + 1];
-        for (int[] arrays : cache) Arrays.fill(arrays, -2);
+        cache = new int[amount + 1];
+        Arrays.fill(cache, -2);
 
-        this.coins = coins;
-
-        return solve(0, amount);
+        return solve(coins, amount);
     }
 
-    private int solve(int i, int amount) {
+    private int solve(int[] coins, int amount) {
+        if (amount < 0)
+            return -1;
+
         if (amount == 0)
             return 0;
 
-        if (i >= cache.length)
-            return -1;
-
-        if (cache[i][amount] > -2)
-            return cache[i][amount];
+        if (cache[amount] > -2)
+            return cache[amount];
 
         int result = Integer.MAX_VALUE;
         boolean resultAvailable = false;
-        for (int coinCount = 0; coinCount <= amount / coins[i]; coinCount++) {
-            int partialResult = solve(i + 1, amount - coinCount * coins[i]);
+        for (int coin : coins) {
+            int partialResult = solve(coins, amount - coin);
             if (partialResult > -1) {
-                partialResult += coinCount;
+                partialResult++;
                 if (partialResult < result) {
                     result = partialResult;
                     resultAvailable = true;
@@ -41,7 +38,7 @@ class Solution {
             }
         }
 
-        cache[i][amount] = resultAvailable ? result : -1;
-        return cache[i][amount];
+        cache[amount] = resultAvailable ? result : -1;
+        return cache[amount];
     }
 }
