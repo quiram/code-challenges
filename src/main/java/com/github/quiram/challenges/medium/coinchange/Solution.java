@@ -6,37 +6,18 @@ import java.util.Arrays;
  * <a href="https://leetcode.com/problems/coin-change/">322. Coin Change</a>
  */
 class Solution {
-    private int[] cache;
-
     public int coinChange(int[] coins, int amount) {
-        cache = new int[amount + 1];
-        Arrays.fill(cache, -2);
+        int[] amounts = new int[amount + 1];
+        Arrays.fill(amounts, amount + 1);
+        amounts[0] = 0;
 
-        return solve(coins, amount);
-    }
-
-    private int solve(int[] coins, int amount) {
-        if (amount < 0)
-            return -1;
-
-        if (amount == 0)
-            return 0;
-
-        if (cache[amount] > -2)
-            return cache[amount];
-
-        int result = Integer.MAX_VALUE;
         for (int coin : coins) {
-            int partialResult = solve(coins, amount - coin);
-            if (partialResult > -1) {
-                partialResult++;
-                if (partialResult < result) {
-                    result = partialResult;
-                }
+            for (int i = 1; i <= amount; i++) {
+                if (coin <= i)
+                    amounts[i] = Math.min(amounts[i], 1 + amounts[i - coin]);
             }
         }
 
-        cache[amount] = result < Integer.MAX_VALUE ? result : -1;
-        return cache[amount];
+        return amounts[amount] > amount ? -1 : amounts[amount];
     }
 }
