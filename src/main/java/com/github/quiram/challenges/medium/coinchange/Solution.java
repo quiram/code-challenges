@@ -26,19 +26,17 @@ class Solution {
             return cache[amount];
 
         int result = Integer.MAX_VALUE;
-        boolean resultAvailable = false;
         for (int coin : coins) {
             int partialResult = solve(coins, amount - coin);
             if (partialResult > -1) {
                 partialResult++;
                 if (partialResult < result) {
                     result = partialResult;
-                    resultAvailable = true;
                 }
             }
         }
 
-        cache[amount] = resultAvailable ? result : -1;
+        cache[amount] = result < Integer.MAX_VALUE ? result : -1;
         return cache[amount];
     }
 }
