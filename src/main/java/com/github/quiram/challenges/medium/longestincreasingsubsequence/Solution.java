@@ -1,40 +1,37 @@
 package com.github.quiram.challenges.medium.longestincreasingsubsequence;
 
-import java.util.Arrays;
-
 /**
  * <a href="https://leetcode.com/problems/longest-increasing-subsequence/">300. Longest Increasing Subsequence</a>
  */
 class Solution {
-    int[][] memo;
+    int[] results;
 
     public int lengthOfLIS(int[] nums) {
-        memo = new int[20002][nums.length];
-        for (int[] array : memo) {
-            Arrays.fill(array, -1);
+        results = new int[nums.length];
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            results[i] = 1 + solve(nums, nums[i], i + 1);
         }
-        return solve(nums, -10001, 0);
+
+        int result = 0;
+        for (int r : results) {
+            if (r > result) {
+                result = r;
+            }
+        }
+
+        return result;
     }
 
-    private int solve(int[] a, int max, int i) {
-        if (i == a.length)
-            return 0;
+    private int solve(int[] a, int n, int i) {
+        int result = 0;
 
-        int cache_index = max < 0 ? 10000 - max : max;
-        int cached = memo[cache_index][i];
-        if (cached > -1)
-            return cached;
+        for (int j = i; j < a.length; j++) {
+            if (n < a[j] && results[j] > result) {
+                result = results[j];
+            }
+        }
 
-        int n = a[i];
-
-        final int solution_without_n = solve(a, max, i + 1);
-        if (n <= max)
-            return solution_without_n;
-
-        final int solution_with_n = solve(a, n, i + 1);
-
-        final int result = Math.max(1 + solution_with_n, solution_without_n);
-        memo[cache_index][i] = result;
         return result;
     }
 }
