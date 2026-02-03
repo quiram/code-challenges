@@ -9,15 +9,13 @@ class Solution {
     public int lengthOfLIS(int[] nums) {
         results = new int[nums.length];
 
+        int result = 0;
         for (int i = nums.length - 1; i >= 0; i--) {
             results[i] = 1 + solve(nums, nums[i], i + 1);
-        }
-
-        int result = 0;
-        for (int r : results) {
-            if (r > result) {
-                result = r;
+            if (results[i] > result) {
+                result = results[i];
             }
+
         }
 
         return result;
