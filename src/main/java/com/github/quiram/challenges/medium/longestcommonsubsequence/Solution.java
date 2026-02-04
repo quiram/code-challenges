@@ -9,6 +9,12 @@ class Solution {
     private int[][] memo;
 
     public int longestCommonSubsequence(String text1, String text2) {
+        if (text1.length() > text2.length()) {
+            String temp = text1;
+            text1 = text2;
+            text2 = temp;
+        }
+
         memo = new int[text1.length()][text2.length()];
         for (int[] array : memo)
             Arrays.fill(array, -1);
