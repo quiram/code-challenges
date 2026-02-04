@@ -5,17 +5,19 @@ package com.github.quiram.challenges.medium.longestcommonsubsequence;
  */
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
-        int[][] results = new int[text1.length() + 1][text2.length() + 1];
+        char[] t1 = text1.toCharArray();
+        char[] t2 = text2.toCharArray();
+        int[][] results = new int[t1.length + 1][t2.length + 1];
 
-        for (int i = 1; i <= text1.length(); i++) {
-            for (int j = 1; j <= text2.length(); j++) {
-                if (text1.charAt(i - 1) == text2.charAt(j - 1))
+        for (int i = 1; i <= t1.length; i++) {
+            for (int j = 1; j <= t2.length; j++) {
+                if (t1[i - 1] == t2[j - 1])
                     results[i][j] = 1 + results[i - 1][j - 1];
                 else
                     results[i][j] = Math.max(results[i - 1][j], results[i][j - 1]);
             }
         }
 
-        return results[text1.length()][text2.length()];
+        return results[t1.length][t2.length];
     }
 }
