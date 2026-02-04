@@ -19,29 +19,23 @@ class Solution {
         for (int[] array : memo)
             Arrays.fill(array, -1);
 
-        return solve(text1, text2, 0, 0);
+        return solve(text1, text2, text1.length(), text2.length());
     }
 
     private int solve(String text1, String text2, int i1, int i2) {
-        if (i1 == text1.length() || i2 == text2.length())
+        if (i1 == 0 || i2 == 0)
             return 0;
 
-        if (memo[i1][i2] > -1)
-            return memo[i1][i2];
+        if (memo[i1 - 1][i2 - 1] > -1)
+            return memo[i1 - 1][i2 - 1];
 
-        char c = text1.charAt(i1);
-        int new_i2 = text2.indexOf(c, i2);
+        final int result;
+        if (text1.charAt(i1 - 1) == text2.charAt(i2 - 1))
+            result = 1 + solve(text1, text2, i1 - 1, i2 - 1);
+        else
+            result = Math.max(solve(text1, text2, i1 - 1, i2), solve(text1, text2, i1, i2 - 1));
 
-        final int solution_without_c = solve(text1, text2, i1 + 1, i2);
-        int result;
-        if (new_i2 == -1)
-            result = solution_without_c;
-        else {
-            final int solution_with_c = solve(text1, text2, i1 + 1, new_i2 + 1);
-            result = Math.max(solution_without_c, 1 + solution_with_c);
-        }
-
-        memo[i1][i2] = result;
+        memo[i1 - 1][i2 - 1] = result;
         return result;
     }
 }
