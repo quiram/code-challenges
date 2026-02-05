@@ -19,7 +19,7 @@ class Solution {
 
         segmentations[0] = true;
         for (int i = 1; i < segmentations.length; i++) {
-            for (int j = i - 1; j >= 0 && !segmentations[i] && i - j <= maxWordLength; j--) {
+            for (int j = i - 1; j >= Math.max(0, i - maxWordLength) && !segmentations[i]; j--) {
                 segmentations[i] = segmentations[j] && dict.contains(s.substring(j, i));
             }
         }
