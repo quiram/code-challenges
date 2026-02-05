@@ -1,36 +1,25 @@
 package com.github.quiram.challenges.medium.workdbreak;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="https://leetcode.com/problems/word-break/description/">139. Word Break</a>
  */
 class Solution {
-    private Map<String, Boolean> memo;
 
     public boolean wordBreak(String s, List<String> wordDict) {
-        memo = new HashMap<>();
-        return solve(s, 0, s.length(), new HashSet<>(wordDict));
-    }
+        boolean[] segmentations = new boolean[s.length() + 1];
+        Set<String> dict = new HashSet<>(wordDict);
 
-    private boolean solve(String s, int start, int end, Set<String> wordDict) {
-        if (start >= end)
-            return false;
-
-        String word = s.substring(start, end);
-        if (wordDict.contains(word))
-            return true;
-
-        Boolean result = memo.get(word);
-        if (result != null)
-            return result;
-
-        result = false;
-        for (int i = start + 1; i < end && !result; i++) {
-            result = solve(s, start, i, wordDict) && solve(s, i, end, wordDict);
+        segmentations[0] = true;
+        for (int i = 1; i < segmentations.length; i++) {
+            for (int j = 0; j < i && !segmentations[i]; j++) {
+                segmentations[i] = segmentations[j] && dict.contains(s.substring(j, i));
+            }
         }
 
-        memo.put(word, result);
-        return result;
+        return segmentations[segmentations.length - 1];
     }
 }
