@@ -12,10 +12,14 @@ class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] segmentations = new boolean[s.length() + 1];
         Set<String> dict = new HashSet<>(wordDict);
+        int maxWordLength = 0;
+
+        for (String word : wordDict)
+            maxWordLength = Math.max(maxWordLength, word.length());
 
         segmentations[0] = true;
         for (int i = 1; i < segmentations.length; i++) {
-            for (int j = 0; j < i && !segmentations[i]; j++) {
+            for (int j = i - 1; j >= 0 && !segmentations[i] && i - j <= maxWordLength; j--) {
                 segmentations[i] = segmentations[j] && dict.contains(s.substring(j, i));
             }
         }
