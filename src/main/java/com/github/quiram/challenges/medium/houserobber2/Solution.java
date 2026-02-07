@@ -1,4 +1,4 @@
-package com.github.quiram.challenges.medium.houserobber2.houserobber;
+package com.github.quiram.challenges.medium.houserobber2;
 
 /**
  * <a href="https://leetcode.com/problems/house-robber-ii/description/">213. House Robber II</a>
