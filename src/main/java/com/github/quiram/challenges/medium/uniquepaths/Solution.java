@@ -6,7 +6,6 @@ package com.github.quiram.challenges.medium.uniquepaths;
 class Solution {
     public int uniquePaths(int m, int n) {
         int[][] results = new int[m][n];
-        results[m - 1][n - 1] = 1;
 
         for (int i = 0; i < m; i++)
             results[i][n - 1] = 1;
