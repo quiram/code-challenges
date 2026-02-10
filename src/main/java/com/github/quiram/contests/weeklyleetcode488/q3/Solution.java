@@ -1,4 +1,4 @@
-package com.github.quiram.contests.leetcode488.q3;
+package com.github.quiram.contests.weeklyleetcode488.q3;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

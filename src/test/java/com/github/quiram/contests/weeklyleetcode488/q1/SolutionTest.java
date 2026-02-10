@@ -1,4 +1,4 @@
-package com.github.quiram.contests.leetcode488.q1;
+package com.github.quiram.contests.weeklyleetcode488.q1;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

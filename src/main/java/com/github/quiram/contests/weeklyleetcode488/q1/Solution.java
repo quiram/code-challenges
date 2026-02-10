@@ -1,4 +1,4 @@
-package com.github.quiram.contests.leetcode488.q1;
+package com.github.quiram.contests.weeklyleetcode488.q1;
 
 /**
  * <a href="https://leetcode.com/contest/weekly-contest-488/problems/count-dominant-indices/">Q1. Count Dominant Indices</a>

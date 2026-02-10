@@ -1,4 +1,4 @@
-package com.github.quiram.contests.leetcode488.q2;
+package com.github.quiram.contests.weeklyleetcode488.q2;
 
 import java.util.Arrays;
 import java.util.List;
