@@ -10,13 +10,9 @@ class Solution {
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> result = new ArrayList<>();
 
-        if (numRows >= 1)
-            result.add(List.of(1));
+        result.add(List.of(1));
 
-        if (numRows >= 2)
-            result.add(List.of(1, 1));
-
-        for (int i = 2; i < numRows; i++) {
+        for (int i = 1; i < numRows; i++) {
             final List<Integer> seed = result.get(i - 1);
             List<Integer> newRow = new ArrayList<>();
             newRow.add(1);
